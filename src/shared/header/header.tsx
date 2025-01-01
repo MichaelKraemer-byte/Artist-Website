@@ -1,10 +1,5 @@
-import * as React from 'react';
-import { Component } from 'react';
-
-
- 
 const Header = () =>
-    
+
  <header>
             
     <a href='#gallery'>Gallery</a>
