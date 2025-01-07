@@ -7,13 +7,14 @@
 
     .left-content {
         flex: 1;
-        background-color: #2c2c2c; /* Anthrazit */
+        background-color: rgb(8,8,10); /* Anthrazit */
         color: white;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         padding: 20px;
+
 
         .title {
             font-size: 3rem;
@@ -35,6 +36,8 @@
         position: relative;
         overflow: hidden;
 
+
+
         .image-slide {
             position: absolute;
             top: 0;
@@ -45,15 +48,37 @@
             background-position: center;
             opacity: 0;
             visibility: hidden;
-            
             transition: opacity 1s ease-in-out, visibility 0s linear 1s;
-            
+            box-shadow: inset 0 0 100px rgba(0, 0, 0, 1);
+
             &.active {
               opacity: 1;
               visibility: visible;
               transition: opacity 1s ease-in-out;
+              animation: scaleAnimation 12s ease-in-out infinite;
             }
-          }
-          
+          }  
     }
 }
+
+.button-row{
+    display: flex;
+    gap: 16px;
+    display: flex;
+    align-items: center;
+    span {
+        font-weight: 100;
+    }
+}
+
+@keyframes scaleAnimation {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
