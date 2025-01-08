@@ -1,37 +1,57 @@
-import { Button } from '@mui/material';
-import './header.scss'
+import React from 'react';
+import { Button, AppBar, Toolbar, IconButton, Switch, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { Brightness4, Brightness7 } from '@mui/icons-material';
+import { useTheme } from '@mui/material/styles';
 
-const Header = () =>
+interface HeaderProps {
+  toggleDarkMode: () => void; // Function to toggle dark mode
+}
 
- <header className='header-container'>
-            
-    <div className='leftWing'>
-        <Link to="/">
-            <img className="logo" src='/img/logo/mkc-gallery-logo.svg'></img>
-        </Link>
+const Header: React.FC<HeaderProps> = ({ toggleDarkMode }) => {
+  const theme = useTheme(); // Get the current theme
 
-        <Link to="/instagram">
-            <a href='#instagram'>Recent posts</a>
-        </Link>
-        <a href='#aboutMe'>About me</a>
-    </div>
+  return (
+    <header className='header-container'>
+      <AppBar position="sticky">
+        <Toolbar>
+          <div className="leftWing">
+            <Link to="/">
+              <img className="logo" src='/img/logo/mkc-gallery-logo.svg' alt="logo" />
+            </Link>
 
-    <div className='rightWing'>
-        <Link to="/register">
-            <Button variant="outlined">
-                <a href='#register'>Register</a>
-            </Button>
-        </Link>
-        <Link to="/sign-in">
-            <Button variant="contained">
-                <a href='#sign-in'>Sign in</a>
-            </Button>
-        </Link>
-    </div>
+            <Link to="/instagram">
+              <Button variant="text">Recent posts</Button>
+            </Link>
 
+            <Link to="#aboutMe">
+              <Button variant="text">About me</Button>
+            </Link>
+          </div>
 
-</header>;
+          <div className="rightWing">
+            <Link to="/register">
+              <Button variant="outlined">Register</Button>
+            </Link>
+            <Link to="/sign-in">
+              <Button variant="contained">Sign in</Button>
+            </Link>
+          </div>
 
+          <div className="darkModeToggle">
+            <IconButton color="inherit" onClick={toggleDarkMode}>
+              {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+            </IconButton>
+            <Switch
+              checked={theme.palette.mode === 'dark'}
+              onChange={toggleDarkMode}
+              color="default"
+            />
+          </div>
+        </Toolbar>
+      </AppBar>
+    </header>
+  );
+};
 
 export default Header;

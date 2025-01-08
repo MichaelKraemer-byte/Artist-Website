@@ -37,9 +37,9 @@ const AtTheTopFold: React.FC = () => {
     <div className='button-row'>
       <Button variant="contained">Book Now</Button>
       <span>or</span>
-      <Link to="/register">
+      <Link to="/sign-in">
         <Button variant="outlined">
-          <a href='#sign-in'>Sign in</a>
+          Sign in
         </Button>
       </Link>
     </div>
