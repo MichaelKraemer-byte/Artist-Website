@@ -1,23 +1,18 @@
 import React from 'react';
-import { Button, AppBar, Toolbar, IconButton, Switch, Typography } from '@mui/material';
+import { Button, AppBar, Toolbar, IconButton, Switch } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Brightness4, Brightness7 } from '@mui/icons-material';
-import { useTheme } from '@mui/material/styles';
+import { useThemeContext } from '../../theme/themeContext'; 
+import './header.scss';
 
-interface HeaderProps {
-  toggleDarkMode: () => void; // Function to toggle dark mode
-}
-
-const Header: React.FC<HeaderProps> = ({ toggleDarkMode }) => {
-  const theme = useTheme(); // Get the current theme
+const Header: React.FC = () => {
+  const { darkMode, toggleDarkMode } = useThemeContext(); 
 
   return (
-    <header className='header-container'>
-      <AppBar position="sticky">
-        <Toolbar>
+    <header className={`header-container ${darkMode ? 'darkmode' : 'lightmode'}`}>
           <div className="leftWing">
             <Link to="/">
-              <img className="logo" src='/img/logo/mkc-gallery-logo.svg' alt="logo" />
+              <img className='logo' src={`/img/logo/${darkMode? 'mkc-gallery-logo.svg' : 'mkc-gallery-logo-black.svg'}`} alt="logo" />
             </Link>
 
             <Link to="/instagram">
@@ -30,6 +25,16 @@ const Header: React.FC<HeaderProps> = ({ toggleDarkMode }) => {
           </div>
 
           <div className="rightWing">
+            <div className="darkModeToggle">
+              <IconButton color="inherit" onClick={toggleDarkMode}>
+                {darkMode ? <Brightness7 /> : <Brightness4 />}
+              </IconButton>
+              <Switch
+                checked={darkMode}
+                onChange={toggleDarkMode}
+                color="default"
+              />
+            </div>
             <Link to="/register">
               <Button variant="outlined">Register</Button>
             </Link>
@@ -37,19 +42,6 @@ const Header: React.FC<HeaderProps> = ({ toggleDarkMode }) => {
               <Button variant="contained">Sign in</Button>
             </Link>
           </div>
-
-          <div className="darkModeToggle">
-            <IconButton color="inherit" onClick={toggleDarkMode}>
-              {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
-            </IconButton>
-            <Switch
-              checked={theme.palette.mode === 'dark'}
-              onChange={toggleDarkMode}
-              color="default"
-            />
-          </div>
-        </Toolbar>
-      </AppBar>
     </header>
   );
 };

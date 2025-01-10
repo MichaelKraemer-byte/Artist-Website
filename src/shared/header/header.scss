@@ -2,12 +2,21 @@
     position: fixed;
     left: 0;
     right: 0;
-    padding: 32px 24px 16px 24px;
+    padding: 32px 48px 12px 48px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 1;
+    width: 100%;
+    z-index: 2;
     backdrop-filter: blur(2px);
+    background-color: rgb(8 8 10 / 52%);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    &.darkmode{
+        background-color: rgb(8 8 10 / 52%);
+    }
+    &.lightmode{
+        background-color: #f3f9ff85;
+    }
 
     .leftWing {
         box-sizing: border-box;
@@ -26,6 +35,13 @@
         gap: 24px;
         align-items: center;
     }
-
 }
 
+.logo {
+    width: 120px;
+    height: auto;
+  }
+
+.title {
+    text-align: center;
+}

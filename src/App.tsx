@@ -4,32 +4,17 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import InstagramPage from './pages/widgets/instagram/insta-widget.tsx'; 
 import HomePage from './pages/home.tsx';
 import { SignIn } from './pages/sign-in/sign-in.tsx'
-import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
-import { useState } from 'react';
+import { ThemeContextProvider } from './theme/themeContext.tsx';
 
+const App = () => {
 
-function App() {
-    // State for dark mode
-    const [darkMode, setDarkMode] = useState(false);
-
-    // Define light and dark themes
-    const theme = createTheme({
-      palette: {
-        mode: darkMode ? 'dark' : 'light',
-      },
-    });
-
-      // Toggle dark mode
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline /> {/* Apply baseline styles */}
+    <ThemeContextProvider>
+
     <Router>
       <div>
-        <Header toggleDarkMode={toggleDarkMode} />
+        <Header/>
 
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -39,7 +24,7 @@ function App() {
         </Routes>
       </div>
     </Router>
-    </ThemeProvider>
+    </ThemeContextProvider>
 
   );
 }
